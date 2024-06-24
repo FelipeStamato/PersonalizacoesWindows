@@ -1,11 +1,14 @@
 ﻿using System;
-using Teste.entities;
-public class Program
-{
-    static void Main(string[] args)
+using Teste.Servicos;
+
+namespace Teste {
+    public class Program
     {
-        string caminhoImagem = @"C:\Users\User\Desktop\preto.png";
-        Wallpaper.DefinirWallpaper(caminhoImagem);
+        static void Main(string[] args)
+        {
+            string caminhoImagem = @"C:\Users\User\Desktop\branco.png";
+            WallpaperAppServico.PlanoDeFundo(caminhoImagem);
+        }
     }
 }
 

@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="entities\Wallpaper.cs" />
+    <Compile Include="Handlers\PlanoDeFundoHandler.cs" />
+    <Compile Include="Servicos\WallpaperAppServico.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

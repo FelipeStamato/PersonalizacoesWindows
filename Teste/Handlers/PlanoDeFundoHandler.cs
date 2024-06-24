@@ -3,13 +3,18 @@ using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
-namespace Teste.entities
+namespace Teste.Handlers
 {
-    public class Wallpaper
+    public class PlanoDeFundoHandler
     {
-        public static void DefinirWallpaper(string caminhoImagem)
+        public string caminhoimagem;
+        public PlanoDeFundoHandler(string caminhoimagem)
         {
-            if (!File.Exists(caminhoImagem))
+            this.caminhoimagem = caminhoimagem;
+        }
+        public void Executa()
+        {
+            if (!File.Exists(caminhoimagem))
             {
                 Console.WriteLine("O caminho da imagem não existe.");
                 return;
@@ -23,15 +28,15 @@ namespace Teste.entities
 
                     if (chave != null)
                     {
-                        chave.SetValue("Wallpaper", caminhoImagem);
-                        SystemParametersInfo(0x0014, 0, caminhoImagem, 0x01 | 0x02);
+                        chave.SetValue("Wallpaper", caminhoimagem);
+                        SystemParametersInfo(0x0014, 0, caminhoimagem, 0x01 | 0x02);
                         Console.WriteLine("Mudança realizada.");
                     }
                     else
                     {
                         Console.WriteLine("Erro ao abrir chave de registro.");
                     }
-                }               
+                }
             }
             catch (Exception e)
             {
@@ -42,10 +47,6 @@ namespace Teste.entities
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
     }
+
 }
-
-
-
-// Comando dentro de uma classe de handler para evitar armazenamento da magma
-// Dar uma olhada app serviço
 

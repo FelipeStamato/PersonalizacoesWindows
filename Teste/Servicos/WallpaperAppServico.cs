@@ -1,12 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
+using Teste.Handlers;
 
 namespace Teste.Servicos
 {
-    class WallpaperAppServico
+    public static class WallpaperAppServico
     {
+        public static void PlanoDeFundo(string caminhoimagem)
+        {
+            new PlanoDeFundoHandler(caminhoimagem).Executa();
+        }
+
+
+
     }
 }
+        
+
+
+
+// Comando dentro de uma classe de handler para evitar armazenamento da magma
+// Dar uma olhada app serviço
+
