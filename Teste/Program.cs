@@ -1,16 +1,16 @@
 ﻿using System;
+using Teste;
 using Teste.Servicos;
 
-namespace Teste {
-    public class Program
+namespace Teste
+{
+    class Program
     {
         static void Main(string[] args)
         {
-            string caminhoImagem = @"C:\Users\User\Desktop\branco.png";
-            WallpaperAppServico.PlanoDeFundo(caminhoImagem);
+            string caminhoimagem = @"C:\Users\User\Desktop\diferen-as-resolu-es-1-.jpg";
+            WallpaperAppServico.TelaDeBloqueio(caminhoimagem);
         }
+
     }
 }
-
-// C:\Users\User\Desktop\branco.png
-// C:\Users\User\Desktop\preto.png

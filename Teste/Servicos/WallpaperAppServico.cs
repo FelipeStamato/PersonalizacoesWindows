@@ -8,19 +8,16 @@ namespace Teste.Servicos
 {
     public static class WallpaperAppServico
     {
+
         public static void PlanoDeFundo(string caminhoimagem)
         {
             new PlanoDeFundoHandler(caminhoimagem).Executa();
         }
 
 
-
+        public static void TelaDeBloqueio(string caminhoimagem)
+        {
+            new TelaDeBloqueioHandler(caminhoimagem).Executa();
+        }
     }
 }
-        
-
-
-
-// Comando dentro de uma classe de handler para evitar armazenamento da magma
-// Dar uma olhada app serviço
-
