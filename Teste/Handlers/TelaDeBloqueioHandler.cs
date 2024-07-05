@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Win32;
 using Teste.Servicos;
+using System.IO;
 
 namespace Teste.Handlers
 {
@@ -11,20 +12,31 @@ namespace Teste.Handlers
         {
             this.caminhoimagem = caminhoimagem;
         }
-
         public void Executa()
         {
             try
             {
-                RegistroAppServico registro = new RegistroAppServico(RegistryHive.LocalMachine, RegistryView.Registry64);
-                registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImagePath", caminhoimagem, RegistryValueKind.String);
-                registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImageUrl", caminhoimagem, RegistryValueKind.String);
-                registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImageStatus", "1", RegistryValueKind.DWord);
+                ExisteArquivo(caminhoimagem);
+                CriaChave();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Erro: " + ex.Message);
             }
+        }
+        private void ExisteArquivo(string caminhoimagem)
+        {
+            if (!File.Exists(caminhoimagem))
+            {
+                throw new FileNotFoundException("O arquivo especificado não existe.", caminhoimagem);
+            }
+        }
+        public void CriaChave()
+        {
+            RegistroAppServico registro = new RegistroAppServico(RegistryHive.LocalMachine, RegistryView.Registry64);
+            registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImagePath", caminhoimagem, RegistryValueKind.String);
+            registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImageUrl", caminhoimagem, RegistryValueKind.String);
+            registro.EscreveValorRegistro(@"SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP", "LockScreenImageStatus", "1", RegistryValueKind.DWord);
         }
     }
 }

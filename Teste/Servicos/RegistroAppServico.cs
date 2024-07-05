@@ -11,8 +11,6 @@ namespace Teste.Servicos
     {
         private RegistryHive registry_hive;
         private RegistryView registry_view;
-
-        /// <exception cref=""></exception>
         public RegistroAppServico(RegistryHive registry_hive, RegistryView registry_view)
         {
             this.registry_hive = registry_hive;
