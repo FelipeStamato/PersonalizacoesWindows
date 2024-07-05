@@ -8,8 +8,7 @@ namespace Teste.Handlers
 {
     public class PlanoDeFundoHandler
     {
-        private readonly string caminhoimagem;
-
+        public string caminhoimagem;
         public PlanoDeFundoHandler(string caminhoimagem)
         {
             this.caminhoimagem = caminhoimagem;
@@ -18,15 +17,16 @@ namespace Teste.Handlers
         {
             try
             {
-                VerificaArquivo(caminhoimagem);
+                ExisteArquivo();
                 CriaChave();
+                AtualizaWallpaper();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao definir o papel de parede: " + ex.Message);
+                // Log de exceção
             }
         }
-        private void VerificaArquivo(string caminhoimagem)
+        private void ExisteArquivo()
         {
             if (!File.Exists(caminhoimagem))
             {
@@ -39,8 +39,12 @@ namespace Teste.Handlers
             registro.EscreveValorRegistro(@"Control Panel\Desktop", "Wallpaper", caminhoimagem, RegistryValueKind.String);
             registro.EscreveValorRegistro(@"Control Panel\Desktop", "WallpaperStyle", "6", RegistryValueKind.String);
             registro.EscreveValorRegistro(@"Control Panel\Desktop", "TileWallpaper", "0", RegistryValueKind.String);
+        }
+        private void AtualizaWallpaper()
+        {
             SystemParametersInfo(20, 0, caminhoimagem, 0x01 | 0x02);
         }
+
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);

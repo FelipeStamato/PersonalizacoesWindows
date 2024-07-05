@@ -16,15 +16,15 @@ namespace Teste.Handlers
         {
             try
             {
-                ExisteArquivo(caminhoimagem);
+                ExisteArquivo();
                 CriaChave();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro: " + ex.Message);
+                // Log de exceção
             }
         }
-        private void ExisteArquivo(string caminhoimagem)
+        private void ExisteArquivo()
         {
             if (!File.Exists(caminhoimagem))
             {
